@@ -28,7 +28,6 @@ def process(imagepath):
 
     # Adaptive threashhold
     thresh = cv2.adaptiveThreshold(blur, 255, 1, 1, 11, 2)
-    cv2.imwrite("4.jpg", thresh)
 
     # find countours
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)

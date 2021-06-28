@@ -3,8 +3,6 @@ import configparser
 import math
 import time
 
-correct = [0, 1, 0, 1, 2, 1, 0, 1, 1, 2,0]
-
 # Import settings
 config = configparser.ConfigParser()
 config.read('./src/settings.ini')
@@ -12,11 +10,7 @@ default = config['DEFAULT']
 
 questions = int(default['questions'])
 choices = int(default['choices'])
-area_min_limit = float(default['area_min_limit'])
-cellarea = default['cellarea']
-crossarea = default['crossarea']
-circlearea = default['circlearea']
-answer_tolerance = default['answer_tolerance']
+correct = default['correct_answers'].split(", ")
 
 def find(cells, bild, image):
 
@@ -93,12 +87,12 @@ def find(cells, bild, image):
 
     c = 0
     for i in range(len(correct)):
-            x, y = coords[i]
-            if res[i] == correct[i]:
-                    cv2.circle(img, (x, y), 40, (0, 200, 0), -1)
-                    c += 1
-            else:
-                    cv2.circle(img, (x, y), 40, (0, 0, 200), -1)
+        x, y = coords[i]
+        if res[i] == int(correct[i]):
+                cv2.circle(img, (x, y), 40, (0, 200, 0), -1)
+                c += 1
+        else:
+                cv2.circle(img, (x, y), 40, (0, 0, 200), -1)
 
     cv2.imwrite("./out/3answers.jpg", image)
     cv2.imwrite("./out/4correct.jpg", img)

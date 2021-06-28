@@ -1,3 +1,2 @@
-out
-src/__pychache__
-bild4.jpg
+/out/
+__pycache__/

@@ -4,8 +4,7 @@ import find_answers as fa
 import time
 
 
-
-im = 'bild4.jpg'
+im = './in/image.jpg'
 
 
 start_time = time.perf_counter()
