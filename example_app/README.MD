@@ -1,0 +1,1 @@
+simple flask server where photos of answer-sheets can be uploaded and added to a result list.

@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+
+    <body>
+        <div class="topnav">
+            <a href="/">Ladda up</a>
+            <a href="/results">Resultat</a>
+            <a href="/man">Lägg till</a>
+        </div> 
+
+        <div>
+        <h2>Nytt resultat</h2>
+        <form action = "/uploader" method = "POST" 
+                enctype = "multipart/form-data">
+                <label>Namn:</label>
+                <input type = "text" name="name" id="name"/><br>
+                <label>Fil:</label>
+                <input type = "file" name = "file" /><br>
+                <button type="submit" class="btn btn-primary">Skicka</button>
+            </form>  
+        </div>
+    </body>
+</html>

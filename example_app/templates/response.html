@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+    <h1>Resultat</h1>
+    <p>{{ res }} rätt av 11</p>
+    <img src="{{ image }}" width=50%>
+
+    <div>
+        <h1>Bekräfta</h1>
+        <form action = "/confirm" method = "POST" 
+                enctype = "multipart/form-data">
+                <label>Namn:</label>
+                <input type = "text" name="name" id="name" value="{{ namn }}"/><br>
+
+                <label>Rätt:</label>
+                <input type = "text" name="corr" id="corr" value="{{ res }}"/><br>
+
+                <label>Utslagsfråga:</label>
+                <input type = "text" name="decQue" id="decQue"/><br>
+                <button type="submit" class="btn btn-primary">Skicka</button>
+            </form>  
+        </div>
+    </body>
+</html>
