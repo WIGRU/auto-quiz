@@ -9,7 +9,7 @@ Scan quiz-sheets and automatically count correct answers. The script works in th
 
 ### Settings:
 | variable name   | type    | description |
-| -------------   | ------- | ------------|
+| :-------------   | :------- | :------------|
 | correct_answers | list    | list with the correct option for each question |
 | out_path        | path    | this is where images will be stored if save_im or out_im is set to True      |
 | save_im | bool | save images that show the analyzing process    |
