@@ -6,6 +6,8 @@ import time
 config = configparser.ConfigParser()
 config.read('./src/settings.ini')
 default = config['DEFAULT']
+save_im = default['save_im'] == "True"
+out_path = default['out_path']
 
 cellarea = json.loads(default['cellarea'])
 
@@ -16,7 +18,7 @@ def find(contours, image):
 
     for i in contours:
             area = cv2.contourArea(i)
-            
+
             # find center of each cell
             min_area = cellarea["min"]
             max_area = cellarea["max"]
@@ -33,6 +35,7 @@ def find(contours, image):
                     
                     count += 1
     
-    cv2.imwrite("./out/2cells.jpg", image)
+    if save_im:
+        cv2.imwrite(f"{ out_path }2cells.jpg", image)
 
     return {'cells': cells}

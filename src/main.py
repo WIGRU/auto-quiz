@@ -1,10 +1,23 @@
 import process_image as pi
 import find_cells as fc
 import find_answers as fa
-import time
 
+import time
+import configparser
+import os
 
 im = './in/image.jpg'
+
+
+config = configparser.ConfigParser()
+config.read('./src/settings.ini')
+default = config['DEFAULT']
+out_path = default['out_path']
+
+# if out folder doesn't exist, make folder
+if not os.path.isdir(out_path):
+    os.mkdir(out_path)
+
 
 
 start_time = time.perf_counter()

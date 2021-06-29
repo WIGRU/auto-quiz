@@ -7,10 +7,12 @@ import time
 config = configparser.ConfigParser()
 config.read('./src/settings.ini')
 default = config['DEFAULT']
-
+out_path = default['out_path']
 questions = int(default['questions'])
 choices = int(default['choices'])
 correct = default['correct_answers'].split(", ")
+save_im = default['save_im'] == "True"
+out_im = default['output_im'] == "True"
 
 def find(cells, bild, image):
 
@@ -69,7 +71,8 @@ def find(cells, bild, image):
 
                     ans.append([a, cX, cY])
 
-                    cv2.circle(image, (cX, cY), 1, (232, 14, 250), -1)
+                    if save_im:
+                        cv2.circle(image, (cX, cY), 1, (232, 14, 250), -1)
                     
 
                     string = f"{cX}, {cY}"
@@ -82,19 +85,25 @@ def find(cells, bild, image):
                     x = int(ans[r][1])
                     y = int(ans[r][2])
                     coords.append([x, y])
-                    cv2.circle(image, (x, y), 20, (0,0,255), -1)
+                    if save_im:
+                        cv2.circle(image, (x, y), 20, (0,0,255), -1)
                     res.append(r)
 
     c = 0
     for i in range(len(correct)):
         x, y = coords[i]
         if res[i] == int(correct[i]):
-                cv2.circle(img, (x, y), 40, (0, 200, 0), -1)
+                if out_im:
+                    cv2.circle(img, (x, y), 40, (0, 200, 0), -1)
                 c += 1
         else:
+            if out_im:
                 cv2.circle(img, (x, y), 40, (0, 0, 200), -1)
 
-    cv2.imwrite("./out/3answers.jpg", image)
-    cv2.imwrite("./out/4correct.jpg", img)
+    if save_im:
+        cv2.imwrite(f"{ out_path }3answers.jpg", image)
+
+    if out_im:
+        cv2.imwrite(f"{ out_path }4correct.jpg", img)
 
     return {'corr': c}

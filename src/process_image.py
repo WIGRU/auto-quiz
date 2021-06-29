@@ -8,9 +8,10 @@ import configparser
 config = configparser.ConfigParser()
 config.read('./src/settings.ini')
 default = config['DEFAULT']
-
+save_im = default['save_im'] == "True"
+out_path = default['out_path']
 area_min_limit = float(default['area_min_limit'])
-
+blurValue = int(default['blur'])
 
 def process(imagepath):
     #
@@ -24,7 +25,7 @@ def process(imagepath):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Blur
-    blur = cv2.GaussianBlur(gray, (5,5), 0)
+    blur = cv2.GaussianBlur(gray, (blurValue,blurValue), 0)
 
     # Adaptive threashhold
     thresh = cv2.adaptiveThreshold(blur, 255, 1, 1, 11, 2)
@@ -63,9 +64,10 @@ def process(imagepath):
     # find countours
     contours, hierarchy = cv2.findContours(img_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Draw contours on image
-    cv2.drawContours(image, contours, -1, (0, 255, 0), 2)
+    if save_im:
+        # Draw contours on image
+        cv2.drawContours(image, contours, -1, (0, 255, 0), 2)
 
-    cv2.imwrite("./out/1contours.jpg", image)
+        cv2.imwrite(f"{ out_path }1contours.jpg", image)
 
     return {'contours': contours, 'image': image}
